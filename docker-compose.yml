@@ -1,0 +1,23 @@
+version: '3'
+
+networks:
+  integration-network:
+    driver: bridge
+    name: integration-network
+
+services:
+  integration-clientes-mysql:
+    image: mysql:5.7
+    container_name: integration-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: integrationDb
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: docker
+    ports:
+      - 3306:3306
+    networks:
+      - integration-network
+    volumes:
+      - .:/usr/src/app
